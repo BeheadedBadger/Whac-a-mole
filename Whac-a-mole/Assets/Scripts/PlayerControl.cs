@@ -5,18 +5,15 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
-    [SerializeField] public Text scoreText;
-    [SerializeField] public Text highScoreText;
-    public int playerScore;
-    public int highScore;
-
-    private void Start()
-    {
-        highScore = PlayerPrefs.GetInt("highScore");
-        ScoreUI();
-    }
+    [SerializeField]public Score score;
 
     void Update()
+    {
+        ProcessInput();
+    }
+
+    //Check if the player has hit a mole
+    void ProcessInput()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -33,35 +30,11 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    //The player has hit a mole
     void HitMole(GameObject mole)
     {
         mole.SetActive(false);
-        Score();
-        ScoreUI();
-    }
-
-    void Score()
-    {
-        playerScore = (playerScore + 1);
-
-        //High score
-        if (playerScore > PlayerPrefs.GetInt("highScore"))
-        {
-            highScore = playerScore;
-            PlayerPrefs.SetInt("highScore", playerScore);
-        }
-    }
-
-    void ScoreUI()
-    {
-        if (playerScore > 0)
-        {
-            scoreText.text = (playerScore.ToString());
-        }
-
-        if (highScore > 0)
-        {
-            highScoreText.text = (PlayerPrefs.GetInt("highScore").ToString());
-        }
+        score.ScoreCount();
+        score.ScoreUI();
     }
 }

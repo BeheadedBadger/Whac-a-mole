@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MoleBehaviour : MonoBehaviour
 {
+    //Object to spawn
     [SerializeField] GameObject mole;
 
+    //Minimum and maximum time to wait before spawning mole
     float MinSpawnTime = 2;
     float MaxSpawnTime = 15;
-    [SerializeField] Timer timer;
     float SpawnTime;
 
     void Start()
@@ -16,9 +17,9 @@ public class MoleBehaviour : MonoBehaviour
         SetSpawnTimer();
     }
 
-
     void Update()
     {
+        //Count down and spawn mole when spawn timer has run out
         SpawnTime -= Time.deltaTime;
         if (SpawnTime <= 0)
         {
@@ -26,11 +27,13 @@ public class MoleBehaviour : MonoBehaviour
         }
     }
 
+    //Determine the time until the next spawn
     void SetSpawnTimer()
     {
         SpawnTime = Random.Range(MinSpawnTime, MaxSpawnTime);
     }
 
+    //Activate the mole
     void ActivateMole()
     {
         mole.SetActive(true);
@@ -38,6 +41,7 @@ public class MoleBehaviour : MonoBehaviour
         StartCoroutine(DeactivateMole(1.3f));
     }
 
+    //Deactivate the mole
     public IEnumerator DeactivateMole(float DeactivateMoleTime)
     {
         yield return new WaitForSeconds(DeactivateMoleTime);
