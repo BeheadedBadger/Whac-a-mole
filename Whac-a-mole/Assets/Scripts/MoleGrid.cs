@@ -35,7 +35,7 @@ public class MoleGrid : MonoBehaviour
         //Width position calculation if width is odd
         else
         {
-            this.gameObject.transform.position = new Vector3(Mathf.FloorToInt(-(width / 2 - 0.5f)), 0, this.gameObject.transform.position.z);
+            this.gameObject.transform.position = new Vector3(-(height / 2), 0, this.gameObject.transform.position.z);
             Debug.Log("Odd width number detected");
         }
 
@@ -49,7 +49,7 @@ public class MoleGrid : MonoBehaviour
         //Height position calculation if height is odd
         else
         {
-            this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 0, Mathf.FloorToInt(-(height / 2 - 0.5f)));
+            this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 0, -(height / 2));
             Debug.Log("Odd height number detected");
         }
     }
