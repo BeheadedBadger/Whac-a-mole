@@ -20,12 +20,17 @@ public class Score : MonoBehaviour
     {
         //Mole hit, add score
         playerScore++;
+    }
 
+    public void Highscore()
+    { 
         //Check if the current score surpasses the high score
         if (playerScore > PlayerPrefs.GetInt("highScore"))
         {
+            //NEW HIGH SCORE!! (Communicate to player)
             highScore = playerScore;
             PlayerPrefs.SetInt("highScore", playerScore);
+            ScoreUI();
         }
     }
 
