@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Timer : MonoBehaviour
     [SerializeField] public Text timeText;
     [SerializeField] public Score score;
     [SerializeField] EndGame endGame;
+    [SerializeField] MoleBehaviour mole;
     public float timeElapsed;
     float levelDuration = 90;
     float timeRemaining;
@@ -24,6 +26,19 @@ public class Timer : MonoBehaviour
         {
             timeElapsed = Time.timeSinceLevelLoad;
             timeRemaining = (levelDuration - timeElapsed);
+
+            //Increase number of spawns as game progresses
+            if (timeRemaining < 60)
+            {
+                Debug.Log("Start phase 2");
+                PhaseTwo();
+            }
+
+            if (timeRemaining < 30)
+            {
+                Debug.Log("Start phase 3");
+                PhaseThree();
+            }
         }
 
         //When the timer has run out, end the game
@@ -33,6 +48,8 @@ public class Timer : MonoBehaviour
             score.Highscore();
             endGame.End();
         }
+
+
 
         DisplayTime(timeRemaining);
     }
@@ -51,5 +68,19 @@ public class Timer : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    //Decrease time between spawns
+    private void PhaseTwo()
+    {
+        mole.MinSpawnTime = 2;
+        mole.MaxSpawnTime = 10;
+    }
+
+    //Decrease time between spawns even more
+    private void PhaseThree()
+    {
+        mole.MinSpawnTime = 0;
+        mole.MaxSpawnTime = 1.5f;
     }
 }
