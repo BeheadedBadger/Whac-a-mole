@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5502395500523241481}
   - component: {fileID: 5442071339725088811}
+  - component: {fileID: 1239188958}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -45,4 +46,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeText: {fileID: 0}
   score: {fileID: 0}
+  endGame: {fileID: 1239188958}
   timeElapsed: 0
+--- !u!114 &1239188958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5810683351467223175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b464d65c644b44a976f61e2208d694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endScreen: {fileID: 0}
+  highScore: {fileID: 0}
+  score: {fileID: 0}
+  scoreText: {fileID: 0}

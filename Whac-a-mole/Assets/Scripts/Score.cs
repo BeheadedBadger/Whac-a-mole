@@ -7,9 +7,10 @@ public class Score : MonoBehaviour
 {
     [SerializeField] public Text scoreText;
     [SerializeField] public Text highScoreText;
-    private int playerScore;
+    public int playerScore;
     private int highScore;
-
+    public bool NewHighScore = false;
+        
     void Start()
     {
         highScore = PlayerPrefs.GetInt("highScore");
@@ -27,7 +28,7 @@ public class Score : MonoBehaviour
         //Check if the current score surpasses the high score
         if (playerScore > PlayerPrefs.GetInt("highScore"))
         {
-            //NEW HIGH SCORE!! (Communicate to player)
+            NewHighScore = true;
             highScore = playerScore;
             PlayerPrefs.SetInt("highScore", playerScore);
             ScoreUI();

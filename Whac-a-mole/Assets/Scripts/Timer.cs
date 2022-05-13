@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] public Text timeText;
     [SerializeField] public Score score;
+    [SerializeField] EndGame endGame;
     public float timeElapsed;
     float levelDuration = 90;
     float timeRemaining;
@@ -30,7 +31,7 @@ public class Timer : MonoBehaviour
         {
             timeRemaining = 0;
             score.Highscore();
-            //Game end
+            endGame.End();
         }
 
         DisplayTime(timeRemaining);
