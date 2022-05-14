@@ -9,16 +9,14 @@ public class MoleBehaviour : MonoBehaviour
     [SerializeField] GameObject bomb;
 
     //Minimum and maximum time to wait before spawning mole
-    public float MinSpawnTime;
-    public float MaxSpawnTime;
+    float MinSpawnTime = 2;
+    float MaxSpawnTime = 15;
     float SpawnTime;
     int moleSelector;
 
     void Start()
     {
         SetSpawnTimer();
-        MinSpawnTime = 2;
-        MaxSpawnTime = 15;
     }
 
     void Update()
@@ -38,7 +36,7 @@ public class MoleBehaviour : MonoBehaviour
 
         if (MaxSpawnTime > 2f)
         {
-            MaxSpawnTime = MaxSpawnTime - 0.0003f;
+            MaxSpawnTime = MaxSpawnTime - 0.0005f;
         }
 
     }

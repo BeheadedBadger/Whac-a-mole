@@ -6,11 +6,11 @@ public class Timer : MonoBehaviour
     [SerializeField] public Text timeText;
     [SerializeField] public Score score;
     [SerializeField] EndGame endGame;
-    public float timeElapsed;
+    float timeElapsed;
     float levelDuration = 90;
     float timeRemaining;
 
-private void Start()
+    void Start()
     {
         timeRemaining = levelDuration;
     }
