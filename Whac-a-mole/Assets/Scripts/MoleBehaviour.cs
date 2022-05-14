@@ -29,6 +29,18 @@ public class MoleBehaviour : MonoBehaviour
         {
             ActivateMole();
         }
+
+        //Slowly increase spawns as level progresses
+        if (MinSpawnTime > 1.5f)
+        {
+            MinSpawnTime = MinSpawnTime - 0.0001f;
+        }
+
+        if (MaxSpawnTime > 2f)
+        {
+            MaxSpawnTime = MaxSpawnTime - 0.0003f;
+        }
+
     }
 
     //Determine the time until the next spawn
@@ -51,8 +63,6 @@ public class MoleBehaviour : MonoBehaviour
         {
            mole.SetActive(true);
         }
-
-        Debug.Log(moleSelector);
         
         //Reset the time and deactivate the mole
         this.SetSpawnTimer();
