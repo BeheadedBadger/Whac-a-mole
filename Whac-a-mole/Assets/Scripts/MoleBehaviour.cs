@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoleBehaviour : MonoBehaviour
@@ -7,6 +6,7 @@ public class MoleBehaviour : MonoBehaviour
     //Object to spawn
     [SerializeField] GameObject mole;
     [SerializeField] GameObject goldenMole;
+    [SerializeField] GameObject bomb;
 
     //Minimum and maximum time to wait before spawning mole
     public float MinSpawnTime;
@@ -52,16 +52,21 @@ public class MoleBehaviour : MonoBehaviour
     //Activate the mole
     void ActivateMole()
     {
-        //Decide whether to spawn a golden mole or regular mole
+        //Decide whether to spawn a golden mole, regular mole or bomb
         moleSelector = Random.Range(1, 20);
         if (moleSelector == 1)
         {
             goldenMole.SetActive(true);
         }
 
+        else if (moleSelector == 2)
+        {
+            bomb.SetActive(true);
+        }
+
         else
         {
-           mole.SetActive(true);
+            mole.SetActive(true);
         }
         
         //Reset the time and deactivate the mole
@@ -75,5 +80,6 @@ public class MoleBehaviour : MonoBehaviour
         yield return new WaitForSeconds(DeactivateMoleTime);
         mole.SetActive(false);
         goldenMole.SetActive(false);
+        bomb.SetActive(false);
     }
 }

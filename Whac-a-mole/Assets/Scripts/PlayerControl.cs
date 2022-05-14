@@ -1,17 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
     [SerializeField]public Score score;
     [SerializeField] ParticleSystem hitParticles;
     [SerializeField] ParticleSystem hitParticlesGold;
+    [SerializeField] ParticleSystem explosionParticles;
+
+    //Screenshake
+    Vector3 originalCameraPos;
+    float shakeAmount = 0.3f;
+    bool screenShaker;
+
+    void Start()
+    {
+        originalCameraPos = this.gameObject.transform.position;
+    }
 
     void Update()
     {
         ProcessInput();
+        if (screenShaker == true)
+        {
+            StartCoroutine(Screenshake(0.3f));
+        }
     }
 
     //Check if the player has hit a mole
@@ -33,6 +46,11 @@ public class PlayerControl : MonoBehaviour
                 {
                     HitGoldenMole(hit.transform.gameObject);
                 }
+
+                else if (hit.transform.name == "Bomb")
+                { 
+                    HitBomb(hit.transform.gameObject);
+                }
             }
         }
     }
@@ -53,5 +71,24 @@ public class PlayerControl : MonoBehaviour
         Instantiate(hitParticlesGold, GoldenMole.gameObject.transform.position, Quaternion.identity);
         score.playerScore = score.playerScore + 5;
         score.ScoreUI();
+    }
+
+    //The player has hit a bomb
+    void HitBomb(GameObject Bomb)
+    {
+        screenShaker = true;
+        Bomb.SetActive(false);
+        Instantiate(explosionParticles, Bomb.gameObject.transform.position, Quaternion.identity);
+        score.playerScore = score.playerScore - 5;
+        score.ScoreUI();
+    }
+
+    //Screenshake
+    IEnumerator Screenshake(float DeactivateShakeTime)
+    {
+        this.gameObject.transform.position = originalCameraPos + Random.insideUnitSphere * shakeAmount;
+        yield return new WaitForSeconds(DeactivateShakeTime);
+        screenShaker = false;
+        this.gameObject.transform.position = originalCameraPos;
     }
 }
